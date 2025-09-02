@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prerequisites
 *.d
 
@@ -39,3 +40,6 @@
 
 # debug information files
 *.dwo
+=======
+build/
+>>>>>>> da01c4e (chore: cpp project configured)
