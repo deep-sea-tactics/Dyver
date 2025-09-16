@@ -45,3 +45,8 @@ build/
 
 # clang
 .cache/
+
+# Cmake Generated
+CMakeFiles/
+CMakeCache.txt
+Makefile
