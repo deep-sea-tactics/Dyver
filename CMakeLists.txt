@@ -1,3 +1,7 @@
+# This is the build system for Dyver. If you require assistance
+# with adding libraries and dependencies, please contact a project manager
+# (Most likely Yevgenya Coonan)
+
 cmake_minimum_required(VERSION 3.16)
 project(Dyver VERSION 0.0.0 LANGUAGES CXX)
 include(FetchContent)
