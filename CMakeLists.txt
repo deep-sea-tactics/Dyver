@@ -25,7 +25,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 FetchContent_MakeAvailable(dss)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(
+    ${PROJECT_NAME} 
+    src/main.cpp
+    src/rov.cpp
+    src/thruster.cpp
+)
 
 target_include_directories(
     ${PROJECT_NAME}
