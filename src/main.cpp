@@ -1,37 +1,22 @@
-#include <Eigen>
-#include "rov.h"
-
 #include <iostream>
-#include "cli.h"
-#include "runtime.h"
-#include "lang.h"
-#include "src/Core/Matrix.h"
-#include "utils.h"
+#include "DSS.h"
 
 int main(int argv, char** argc)
 {
-    runtime::Environment env = runtime::Environment();
-    env.connect_preprocessor_definer(lang::preprocessor_definer);
-    env.connect_command_definer(lang::command_definer);
-    env.apply_error_key(lang::ERR_KEY);
+    DSS::Environment env = DSS::Environment();
 
     env.init();
-    std::optional<runtime::Executor> opt_main_executor = env.main_executor();
+    std::optional<DSS::Executor> opt_main_executor = env.main_executor();
 
     if (opt_main_executor.has_value() == false)
     {
         return 1;
     }
 
-    runtime::Executor main_executor = opt_main_executor.value();
+    DSS::Executor main_executor = opt_main_executor.value();
 
-    main_executor.exec("out DSS Lovingly says \"Hello, world!\"");
-    
-    cli::CLI cli = cli::CLI(&main_executor);
-    cli.init();
-
-    //TODO: Uncomment and run the example script
-    //main_executor.exec("src ../example.dss");
+    DSS::CLI cli = DSS::CLI(&main_executor);
+    cli.init(); // TODO: Execute "src example.dss" in the console to see DSS in action
 
     return 0;
 }

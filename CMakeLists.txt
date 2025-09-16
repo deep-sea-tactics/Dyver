@@ -15,7 +15,7 @@ FetchContent_Declare(
 
 FetchContent_Declare(
     dss
-    GIT_REPOSITORY git@github.com:Inotrandom/deep-sea-shell.git
+    GIT_REPOSITORY https://github.com/Inotrandom/deep-sea-shell.git
     GIT_TAG master
     GIT_PROGRESS TRUE
     GIT_SHALLOW TRUE
@@ -30,6 +30,8 @@ add_executable(
     src/main.cpp
     src/rov.cpp
     src/thruster.cpp
+    ${dss_SOURCE_DIR}/source/runtime.cpp
+    ${dss_SOURCE_DIR}/source/cli.cpp
 )
 
 target_include_directories(
@@ -42,6 +44,5 @@ target_include_directories(
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
-    cli
-    runtime
+    DSS
 )
