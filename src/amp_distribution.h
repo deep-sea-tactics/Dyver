@@ -9,6 +9,10 @@ enum AMP_DISTRIBUTION_PRIORITY
     DISTRIBUTE
 };
 
+/**
+ * @brief Dynamic Amp Request object
+ * 
+ */
 class dynamic_amp_request_t
 {
 public:
