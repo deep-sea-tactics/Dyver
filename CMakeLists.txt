@@ -29,6 +29,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 FetchContent_MakeAvailable(dss)
 
+add_subdirectory(src/test)
+
 add_executable(
     ${PROJECT_NAME} 
     src/main.cpp
