@@ -34,6 +34,7 @@ add_executable(
     src/main.cpp
     src/rov.cpp
     src/thruster.cpp
+    src/BindableAction.cpp
     ${dss_SOURCE_DIR}/source/runtime.cpp
     ${dss_SOURCE_DIR}/source/cli.cpp
 )
