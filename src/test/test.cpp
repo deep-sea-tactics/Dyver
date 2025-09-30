@@ -1,4 +1,6 @@
 #include "test.h"
+#include <exception>
+#include <vector>
 
 test_t TEST_TEST = test_t("test_test", __LINE__, []()
 {

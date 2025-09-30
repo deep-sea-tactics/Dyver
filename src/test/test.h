@@ -3,14 +3,24 @@
 
 #include <string>
 #include <iostream>
+#include <exception>
 
 inline void notification_test_passed(std::string id, uint64_t line)
 {
-    std::cout << "Test [" << id << "] passed without error." << std::endl;
+    std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;
 }
 
 inline void notification_test_failed(std::string id, uint64_t line, bool is_err)
 {
+    if (is_err == true)
+    {
+        std::cout << "\033[31m";
+    }
+    else if (is_err == false)
+    {
+        std::cout << "\033[33m";
+    }
+
     std::cout << "Test [" << id << "] failed";
 
     if (is_err == false)
@@ -38,18 +48,34 @@ struct test_t
 
     bool run()
     {
-        bool res = m_fn();
+        bool res = false;
+        try
+        {
+            res = m_fn();
 
-        if (res == true)
-        {
-            notification_test_passed(m_id, m_line);
+            if (res == true)
+            {
+                notification_test_passed(m_id, m_line);
+            }
+            else if (res == false)
+            {
+                notification_test_failed(m_id, m_line, false);
+            }
         }
-        else if (res == false)
+        catch(const std::exception &e)
         {
-            notification_test_failed(m_id, m_line, false);
+            notification_test_failed(m_id, m_line, true);
+            std::cout << e.what();
+        }
+        catch(const int &code)
+        {
+            notification_test_failed(m_id, m_line, true);
+            std::cout << "Error code: " << code;
         }
 
         std::cout << "      Traceback to line " << int(m_line) << std::endl << std::endl;
+
+        std::cout << "\033[39m";
 
         return res;
     }
