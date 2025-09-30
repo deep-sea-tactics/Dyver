@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 20)
 FetchContent_Declare(
     eigen
     GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
-    GIT_TAG master
+    GIT_TAG 5.0.0
     GIT_PROGRESS TRUE
     GIT_SHALLOW TRUE
     USES_TERMINAL_DOWNLOAD TRUE
