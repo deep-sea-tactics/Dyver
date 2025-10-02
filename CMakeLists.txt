@@ -18,6 +18,15 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
+    sdl
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG release-3.2.x
+    GIT_PROGRESS TRUE
+    GIT_SHALLOW TRUE
+    USES_TERMINAL_DOWNLOAD TRUE
+)
+
+FetchContent_Declare(
     dss
     GIT_REPOSITORY https://github.com/Inotrandom/deep-sea-shell.git
     GIT_TAG master
@@ -28,6 +37,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(eigen)
 FetchContent_MakeAvailable(dss)
+FetchContent_MakeAvailable(sdl)
 
 add_subdirectory(src/test)
 
@@ -46,6 +56,7 @@ target_include_directories(
     PRIVATE
     ${eigen_SOURCE_DIR}/Eigen
     ${dss_SOURCE_DIR}/source
+    ${sdl_SOURCE_DIR}/src
 )
 
 target_link_libraries(
