@@ -27,6 +27,15 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
+    matplotplusplus
+    GIT_REPOSITORY https://github.com/alandefreitas/matplotplusplus.git
+    GIT_TAG master
+    GIT_PROGRESS TRUE
+    GIT_SHALLOW TRUE
+    USES_TERMINAL_DOWNLOAD TRUE
+)
+
+FetchContent_Declare(
     dss
     GIT_REPOSITORY https://github.com/Inotrandom/deep-sea-shell.git
     GIT_TAG master
@@ -38,6 +47,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 FetchContent_MakeAvailable(dss)
 FetchContent_MakeAvailable(sdl)
+FetchContent_MakeAvailable(matplotplusplus)
 
 add_subdirectory(src/test)
 
@@ -46,7 +56,7 @@ add_executable(
     src/main.cpp
     src/rov.cpp
     src/thruster.cpp
-    src/BindableAction.cpp
+    src/bindable_action.cpp
     ${dss_SOURCE_DIR}/source/runtime.cpp
     ${dss_SOURCE_DIR}/source/cli.cpp
 )
@@ -57,6 +67,7 @@ target_include_directories(
     ${eigen_SOURCE_DIR}/Eigen
     ${dss_SOURCE_DIR}/source
     ${sdl_SOURCE_DIR}/src
+    ${matplotplusplus_SOURCE_DIR}/source
 )
 
 target_link_libraries(
