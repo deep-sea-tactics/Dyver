@@ -1,7 +1,7 @@
 #ifndef H_AMP_DISTRIBUTION
 #define H_AMP_DISTRIBUTION
 
-#include <memory>
+#include <bits/floatn-common.h>
 
 enum AMP_DISTRIBUTION_PRIORITY
 {

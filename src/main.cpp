@@ -1,4 +1,3 @@
-#include <iostream>
 #include "DSS.h"
 
 int main(int argv, char** argc)
