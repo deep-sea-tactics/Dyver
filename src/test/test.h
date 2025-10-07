@@ -1,6 +1,7 @@
 #ifndef H_TEST
 #define H_TEST
 
+#include <cstdint>
 #include <string>
 #include <iostream>
 #include <exception>
