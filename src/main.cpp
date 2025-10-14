@@ -1,4 +1,14 @@
 #include "DSS.h"
+#include "runtime.h"
+
+#include <iostream>
+#include <thread>
+
+void command_line(DSS::Executor *p_feed)
+{
+    DSS::CLI cli = DSS::CLI(p_feed);
+    cli.init();
+}
 
 int main(int argv, char** argc)
 {
@@ -14,8 +24,8 @@ int main(int argv, char** argc)
 
     DSS::Executor main_executor = opt_main_executor.value();
 
-    DSS::CLI cli = DSS::CLI(&main_executor);
-    cli.init(); // TODO: Execute "src example.dss" in the console to see DSS in action
-
+    std::thread cli_handle (command_line, &main_executor);
+    cli_handle.join();
+    
     return 0;
 }
