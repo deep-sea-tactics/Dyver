@@ -5,4 +5,5 @@ project(DyverTest)
 add_executable(
     ${PROJECT_NAME}
     test.cpp
+    ../amp_distribution.cpp
 )
