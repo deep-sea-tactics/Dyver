@@ -66,12 +66,15 @@ target_include_directories(
     PRIVATE
     ${eigen_SOURCE_DIR}/Eigen
     ${dss_SOURCE_DIR}/source
-    ${sdl_SOURCE_DIR}/src
-  #  ${matplotplusplus_SOURCE_DIR}/source
+    ${sdl_SOURCE_DIR}/include
+    ${matplotplusplus_SOURCE_DIR}/source
+    ${CMAKE_BINARY_DIR}/_deps/matplotplusplus-build/source/matplot/
 )
 
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
     DSS
+    matplot
+    SDL3::SDL3
 )
