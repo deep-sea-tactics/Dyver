@@ -4,9 +4,9 @@
 #include <iostream>
 #include <thread>
 
-void command_line(DSS::Executor *p_feed)
+void command_line(DSS::Executor *p_exec)
 {
-    DSS::CLI cli = DSS::CLI(p_feed);
+    DSS::CLI cli = DSS::CLI(p_exec);
     cli.init();
 }
 
