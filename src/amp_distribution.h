@@ -167,7 +167,16 @@ public:
      */
     void compute();
 private:
+    /**
+     * @brief The total amount of amperage that this distributor is entitled to give out.
+     * 
+     */
     _Float64 m_max_allowance;
+
+    /**
+     * @brief A vector of active amperage requests.
+     * 
+     */
     std::vector<dynamic_amp_request_t> m_active_requests;
 };
 
