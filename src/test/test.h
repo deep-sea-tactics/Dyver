@@ -6,6 +6,18 @@
 #include <iostream>
 #include <exception>
 
+inline bool approx_eq(_Float64 lhs, _Float64 rhs, _Float64 tolerance)
+{
+    _Float64 diff = (rhs - lhs);
+
+    if (std::abs(diff) > tolerance)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 inline void notification_test_passed(std::string id, uint64_t line)
 {
     std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;

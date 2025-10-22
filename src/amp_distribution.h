@@ -68,7 +68,8 @@ public:
     }
 
     /**
-     * @brief Allow this request to use amperage 
+     * @brief Allow this request to use amperage.
+     * Will not set the "computed" property.
      */
     void set_allowance(_Float64 n)
     {

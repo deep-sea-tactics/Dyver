@@ -5,7 +5,7 @@ auto amp_distributor_t::invoke_request(const _Float64 request, const AMP_REQUEST
     std::shared_ptr<dynamic_amp_request_t> new_request = std::make_shared<dynamic_amp_request_t>(request, priority);
     m_active_requests.push_back(new_request);
 
-    const int32_t location = m_active_requests.size()-1;
+    compute();
 
     return new_request;
 }
@@ -69,35 +69,42 @@ void amp_distributor_t::compute()
     if (p_min_request == nullptr) return; // Also implies that there are no dynamic requests
 
     uint32_t ndynamic_requests = tally_by_priority(AMP_REQUEST_PRIORITY::DISTRIBUTE);
+    uint32_t unfulfilled_requests = ndynamic_requests;
     _Float64 distributed;
-
-    // IF YOU THINK OF A MATH formula that can do this in a simpler manner,
-    // please implement it.
-    //
+    
     // Brief: Start by evenly distributing amperage, collect leftovers from smaller
     // requests, then distribute that among the other requests.
     for (int i = 0; i < ndynamic_requests; i++)
     {
         for (auto request : m_active_requests)
         {
-            distributed = cake/ndynamic_requests; // Split the cake
+            distributed = cake/unfulfilled_requests; // Split the cake
 
             if (request->get_priority() != AMP_REQUEST_PRIORITY::DISTRIBUTE) continue;
-            if (request->is_computed() == true) continue; // Already satisfied
+            if (request->is_computed() == true) continue; // Already satisfied, can skip
             
+            request->set_allowance(distributed); // Helps determine if it's fulfilled.
+
             _Float64 diff = distributed - request->get_request(); // Leftovers
+
+            if (diff > 0) // Nothing left-over if it's negative
+            {
+                request->set_allowance(request->get_request()); // Had some to spare, so crop
+            }
 
             if (request->is_fulfilled() == true)
             {
                 request->mark_computed(); // Fulfilled! Not taking any more amperage away from this.
+                unfulfilled_requests -= 1; // One request has been fulfilled
+                cake -= request->get_request();
+                continue;
             }
-
-            cake -= distributed; // Fair share
-            request->set_allowance(request->get_allowance() + distributed);
-
-
-            if (diff < 0) continue; // The request has nothing to offer if it's negative.
-            cake += diff; // Add leftovers
         }
+    }
+
+    for (auto request : m_active_requests)
+    {
+        if (request->is_computed() == true) continue; // Already computed
+        request->mark_computed(); // Processed to its full ability.
     }
 }
