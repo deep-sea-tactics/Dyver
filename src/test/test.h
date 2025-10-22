@@ -6,6 +6,13 @@
 #include <iostream>
 #include <exception>
 
+/**
+ * @brief Whether or not `lhs` is within `tolerance` of `rhs`
+ * 
+ * @param lhs The value to compare against `rhs`
+ * @param rhs The value being compared against
+ * @param tolerance The range that determines whether or not the values are "approximately" equal.
+ */
 inline bool approx_eq(_Float64 lhs, _Float64 rhs, _Float64 tolerance)
 {
     _Float64 diff = (rhs - lhs);
@@ -18,11 +25,28 @@ inline bool approx_eq(_Float64 lhs, _Float64 rhs, _Float64 tolerance)
     return true;
 }
 
+/**
+ * @brief Which test passed, and where.
+ * 
+ * @param id The identifier of the test.
+ * @param line The traceback line.
+ * 
+ * @see test_t
+ */
 inline void notification_test_passed(std::string id, uint64_t line)
 {
     std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;
 }
 
+/**
+ * @brief Which test failed, and where.
+ * 
+ * @param id The identifier of the test.
+ * @param line The traceback line.
+ * @param is_err Whether or not to display that the test errored.
+ * 
+ * @see test_t
+ */
 inline void notification_test_failed(std::string id, uint64_t line, bool is_err)
 {
     if (is_err == true)
@@ -46,12 +70,18 @@ inline void notification_test_failed(std::string id, uint64_t line, bool is_err)
     }
 }
 
+/**
+ * @brief A test object which contains various utilities for unit testing
+ */
 struct test_t
 {
     bool (*m_fn)();
     std::string m_id;
     uint64_t m_line;
 
+    /**
+     * @brief Construct a new test object
+     */
     test_t(std::string id, uint64_t line, bool (*fn)())
     {
         m_fn = fn;
@@ -59,6 +89,9 @@ struct test_t
         m_line = line;
     }
 
+    /**
+     * Run the test and report failure/success in the standard output
+     */
     bool run()
     {
         bool res = false;
