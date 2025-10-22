@@ -150,7 +150,7 @@ public:
      * @param priority The priority of the request
      * @return dynamic_amp_request_t& 
      */
-    auto invoke_request(const _Float64 request, const AMP_REQUEST_PRIORITY priority) -> dynamic_amp_request_t&;
+    auto invoke_request(const _Float64 request, const AMP_REQUEST_PRIORITY priority) -> std::shared_ptr<dynamic_amp_request_t>;
 
     auto tally_by_priority(const AMP_REQUEST_PRIORITY which) -> uint32_t;
 
@@ -159,7 +159,7 @@ public:
      * 
      * @return dynamic_amp_request_t 
      */
-    auto min_variable_request() -> dynamic_amp_request_t*;
+    auto min_variable_request() -> std::shared_ptr<dynamic_amp_request_t>;
 
     /**
      * @brief Compute and fulfill requests
@@ -177,7 +177,7 @@ private:
      * @brief A vector of active amperage requests.
      * 
      */
-    std::vector<dynamic_amp_request_t> m_active_requests;
+    std::vector<std::shared_ptr<dynamic_amp_request_t>> m_active_requests;
 };
 
 #endif
