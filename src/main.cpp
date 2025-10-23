@@ -4,9 +4,10 @@
 #include <iostream>
 #include <thread>
 
+const std::string MAIN_CLI_NAME = "dyver-dss";
 void command_line(DSS::Executor *p_exec)
 {
-    DSS::CLI cli = DSS::CLI(p_exec);
+    DSS::CLI cli = DSS::CLI(p_exec, MAIN_CLI_NAME);
     cli.init();
 }
 
