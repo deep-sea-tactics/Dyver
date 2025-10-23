@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 #include "../amp_distribution.h"
+#include "../networking/client/nwclient.h"
+#include "../networking/server/nwserver.h"
 
 test_t TEST_TEST = test_t("test_test", __LINE__, []()
 {
