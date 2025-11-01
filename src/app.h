@@ -8,8 +8,8 @@
 #define H_APP
 
 #include "SDL3/SDL.h"
-#include "DSS.h"
-#include "runtime.h"
+#include "dss/DSS.h"
+#include "dss/runtime.h"
 #include "utils.h"
 
 #include <string>

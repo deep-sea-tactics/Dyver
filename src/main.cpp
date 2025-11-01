@@ -1,5 +1,5 @@
-#include "DSS.h"
-#include "runtime.h"
+#include "dss/DSS.h"
+#include "dss/runtime.h"
 
 #include <iostream>
 #include <thread>
