@@ -57,6 +57,7 @@ add_executable(
     src/rov.cpp
     src/thruster.cpp
     src/bindable_action.cpp
+    src/app.cpp
 )
 
 target_include_directories(

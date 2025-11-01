@@ -4,6 +4,8 @@
 #include <iostream>
 #include <thread>
 
+#include "app.h"
+
 const std::string MAIN_CLI_NAME = "dyver-dss";
 void command_line(DSS::Executor *p_exec)
 {
@@ -25,7 +27,12 @@ int main(int argv, char** argc)
 
     DSS::Executor main_executor = opt_main_executor.value();
 
+    app_t app = app_t(&main_executor);
+
     std::thread cli_handle (command_line, &main_executor);
+    
+    app.run();
+
     cli_handle.join();
     
     return 0;

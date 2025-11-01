@@ -33,7 +33,7 @@ inline bool approx_eq(_Float64 lhs, _Float64 rhs, _Float64 tolerance)
  * 
  * @see test_t
  */
-inline void notification_test_passed(std::string id, uint64_t line)
+inline void notification_test_passed(std::string id, uint64_t line) // Yes, it's inline IO.
 {
     std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;
 }
@@ -47,7 +47,7 @@ inline void notification_test_passed(std::string id, uint64_t line)
  * 
  * @see test_t
  */
-inline void notification_test_failed(std::string id, uint64_t line, bool is_err)
+inline void notification_test_failed(std::string id, uint64_t line, bool is_err) // Yes, it's inline IO.
 {
     if (is_err == true)
     {
