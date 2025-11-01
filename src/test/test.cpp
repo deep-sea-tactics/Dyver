@@ -7,7 +7,7 @@
 #include "../networking/client/nwclient.h"
 #include "../networking/server/nwserver.h"
 
-test_t TEST_TEST = test_t("test_test", __LINE__, []()
+static test_t TEST_TEST = test_t("test_test", __LINE__, []()
 {
     if (1 + 1 == 2)
     {
@@ -19,7 +19,7 @@ test_t TEST_TEST = test_t("test_test", __LINE__, []()
     }
 });
 
-test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE__, []()
+static test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE__, []()
 {
     amp_distributor_t distributor = amp_distributor_t(10.0);
     std::shared_ptr<dynamic_amp_request_t> req_a = distributor.invoke_request(5.0, AMP_REQUEST_PRIORITY::ALWAYS_FULFILL);
