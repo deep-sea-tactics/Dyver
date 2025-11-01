@@ -57,8 +57,6 @@ add_executable(
     src/rov.cpp
     src/thruster.cpp
     src/bindable_action.cpp
-    ${dss_SOURCE_DIR}/source/runtime.cpp
-    ${dss_SOURCE_DIR}/source/cli.cpp
 )
 
 target_include_directories(
