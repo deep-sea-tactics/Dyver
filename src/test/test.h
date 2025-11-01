@@ -75,9 +75,9 @@ inline void notification_test_failed(std::string id, uint64_t line, bool is_err)
  */
 struct test_t
 {
-    bool (*m_fn)();
-    std::string m_id;
-    uint64_t m_line;
+    bool (*m_fn)(){nullptr};
+    std::string m_id{""};
+    uint64_t m_line{0};
 
     /**
      * @brief Construct a new test object

@@ -117,22 +117,22 @@ private:
      * @brief Whether or not the dynamic amperage request has been computed
      * 
      */
-    bool m_computed;
+    bool m_computed{false};
 
     /**
      * @brief Priority of the amperage request.
      */
-    AMP_REQUEST_PRIORITY m_priority;
+    AMP_REQUEST_PRIORITY m_priority{AMP_REQUEST_PRIORITY::DISTRIBUTE};
 
     /**
      * @brief Amount of amperage requested
      */
-    _Float64 m_request;
+    _Float64 m_request{0.0};
 
     /**
      * @brief Amount of amperage allowed
      */
-    _Float64 m_allowance;
+    _Float64 m_allowance{0.0};
 };
 
 class amp_distributor_t
@@ -172,13 +172,13 @@ private:
      * @brief The total amount of amperage that this distributor is entitled to give out.
      * 
      */
-    _Float64 m_max_allowance;
+    _Float64 m_max_allowance{0.0};
 
     /**
      * @brief A vector of active amperage requests.
      * 
      */
-    std::vector<std::shared_ptr<dynamic_amp_request_t>> m_active_requests;
+    std::vector<std::shared_ptr<dynamic_amp_request_t>> m_active_requests{{}};
 };
 
 #endif
