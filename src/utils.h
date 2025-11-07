@@ -11,6 +11,10 @@ namespace utils
         WARN
     };
 
+    inline auto square(const double n) -> double
+    {
+        return n * n;
+    }
     
     static void log(MSG_TYPE type, std::string s)
     {

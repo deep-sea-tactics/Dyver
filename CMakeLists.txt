@@ -58,16 +58,19 @@ add_executable(
     src/thruster.cpp
     src/bindable_action.cpp
     src/app.cpp
+    src/physics/body.cpp
+    src/physics/simulation.cpp
 )
 
 target_include_directories(
     ${PROJECT_NAME}
     PRIVATE
-    ${eigen_SOURCE_DIR}/Eigen
+    ${eigen_SOURCE_DIR}
     ${dss_SOURCE_DIR}/source
     ${sdl_SOURCE_DIR}/include
     ${matplotplusplus_SOURCE_DIR}/source
     ${CMAKE_BINARY_DIR}/_deps/matplotplusplus-build/source/matplot/
+    src
 )
 
 target_link_libraries(
