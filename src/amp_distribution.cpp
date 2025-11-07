@@ -1,6 +1,6 @@
 #include "amp_distribution.h"
 
-auto amp_distributor_t::invoke_request(const _Float64 request, const AMP_REQUEST_PRIORITY priority) -> std::shared_ptr<dynamic_amp_request_t>
+auto amp_distributor_t::invoke_request(const double request, const AMP_REQUEST_PRIORITY priority) -> std::shared_ptr<dynamic_amp_request_t>
 {
     std::shared_ptr<dynamic_amp_request_t> new_request = std::make_shared<dynamic_amp_request_t>(request, priority);
     m_active_requests.push_back(new_request);
@@ -29,7 +29,7 @@ auto amp_distributor_t::tally_by_priority(const AMP_REQUEST_PRIORITY which) -> u
 
 auto amp_distributor_t::min_variable_request() -> std::shared_ptr<dynamic_amp_request_t>
 {
-    _Float64 found_min = INFINITY;
+    double found_min = INFINITY;
     std::shared_ptr<dynamic_amp_request_t> p_found = nullptr;
 
     for (auto request : m_active_requests)
@@ -47,7 +47,7 @@ auto amp_distributor_t::min_variable_request() -> std::shared_ptr<dynamic_amp_re
 void amp_distributor_t::compute()
 {
     // Splitting the cake between requests
-    _Float64 cake = m_max_allowance;
+    double cake = m_max_allowance;
 
     for (auto request : m_active_requests)
     {
@@ -70,7 +70,7 @@ void amp_distributor_t::compute()
 
     uint32_t ndynamic_requests = tally_by_priority(AMP_REQUEST_PRIORITY::DISTRIBUTE);
     uint32_t unfulfilled_requests = ndynamic_requests;
-    _Float64 distributed;
+    double distributed;
     
     // Brief: Start by evenly distributing amperage, collect leftovers from smaller
     // requests, then distribute that among the other requests.
@@ -85,7 +85,7 @@ void amp_distributor_t::compute()
             
             request->set_allowance(distributed); // Helps determine if it's fulfilled.
 
-            _Float64 diff = distributed - request->get_request(); // Leftovers
+            double diff = distributed - request->get_request(); // Leftovers
 
             if (diff > 0) // Nothing left-over if it's negative
             {

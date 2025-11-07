@@ -34,7 +34,7 @@ public:
      * @param request The starting request that this object is making.
      * @param priority The priority of the request.
      */
-    dynamic_amp_request_t(const _Float64 request, const AMP_REQUEST_PRIORITY priority)
+    dynamic_amp_request_t(const double request, const AMP_REQUEST_PRIORITY priority)
     {
         m_request = request;
         m_allowance = 0.0;
@@ -52,7 +52,7 @@ public:
         m_priority = AMP_REQUEST_PRIORITY::DISTRIBUTE;
     }
 
-    auto get_request() -> _Float64
+    auto get_request() -> double
     {
         return m_request;
     }
@@ -62,7 +62,7 @@ public:
         return m_priority;
     }
 
-    auto get_allowance() -> _Float64&
+    auto get_allowance() -> double&
     {
         return m_allowance;
     }
@@ -71,7 +71,7 @@ public:
      * @brief Allow this request to use amperage.
      * Will not set the "computed" property.
      */
-    void set_allowance(_Float64 n)
+    void set_allowance(double n)
     {
         m_allowance = n;
     }
@@ -127,18 +127,18 @@ private:
     /**
      * @brief Amount of amperage requested
      */
-    _Float64 m_request{0.0};
+    double m_request{0.0};
 
     /**
      * @brief Amount of amperage allowed
      */
-    _Float64 m_allowance{0.0};
+    double m_allowance{0.0};
 };
 
 class amp_distributor_t
 {
 public:
-    amp_distributor_t(const _Float64 max_allowance)
+    amp_distributor_t(const double max_allowance)
     {
         m_max_allowance = max_allowance;
         m_active_requests = {};
@@ -151,7 +151,7 @@ public:
      * @param priority The priority of the request
      * @return dynamic_amp_request_t& 
      */
-    auto invoke_request(const _Float64 request, const AMP_REQUEST_PRIORITY priority) -> std::shared_ptr<dynamic_amp_request_t>;
+    auto invoke_request(const double request, const AMP_REQUEST_PRIORITY priority) -> std::shared_ptr<dynamic_amp_request_t>;
 
     auto tally_by_priority(const AMP_REQUEST_PRIORITY which) -> uint32_t;
 
@@ -172,7 +172,7 @@ private:
      * @brief The total amount of amperage that this distributor is entitled to give out.
      * 
      */
-    _Float64 m_max_allowance{0.0};
+    double m_max_allowance{0.0};
 
     /**
      * @brief A vector of active amperage requests.

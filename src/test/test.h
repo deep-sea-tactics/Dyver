@@ -13,9 +13,9 @@
  * @param rhs The value being compared against
  * @param tolerance The range that determines whether or not the values are "approximately" equal.
  */
-inline bool approx_eq(_Float64 lhs, _Float64 rhs, _Float64 tolerance)
+inline bool approx_eq(double lhs, double rhs, double tolerance)
 {
-    _Float64 diff = (rhs - lhs);
+    double diff = (rhs - lhs);
 
     if (std::abs(diff) > tolerance)
     {
