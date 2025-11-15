@@ -5,6 +5,30 @@
 
 namespace utils
 {
+    /**
+     * @brief Convert metric "milliU" to U
+     * 
+     */
+    constexpr double MILLIU_T_U = (1.0e-3);
+
+    /**
+     * @brief Convert metric centiU to U
+     * 
+     */
+    constexpr double CENTIU_T_U = (1.0e-2);
+
+    /**
+     * @brief Convert metric nanoU to U
+     * 
+     */
+    constexpr double NANOU_T_U = (1.0e-9);
+
+    /**
+     * @brief Convert metric kiloU to U
+     * 
+     */
+    constexpr double KILOU_T_U = (1.0e3); 
+
     enum MSG_TYPE
     {
         INFO,
