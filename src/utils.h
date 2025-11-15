@@ -35,11 +35,23 @@ namespace utils
         WARN
     };
 
+    /**
+     * @brief Returns the square of n
+     * 
+     * @param n The number to take the square of
+     * @return double Representing the result of the square operation
+     */
     inline auto square(const double n) -> double
     {
         return n * n;
     }
     
+    /**
+     * @brief Log a nicely formatted string in the standard out
+     * 
+     * @param type The type of the message (e.g. MSG_TYPE::WARN)
+     * @param s The string message to output
+     */
     static void log(MSG_TYPE type, std::string s)
     {
         switch (type)
