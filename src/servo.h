@@ -20,7 +20,7 @@ public:
     servo_t(const uint8_t pin)
     {
         m_pin = pin;
-        std::cout << "Pin has been set to Pin:" << pin << std::endl;
+        std::cout << "Pin has been set to Pin: " << int(m_pin) << std::endl;
     }
 
     auto get_pin() -> uint8_t
