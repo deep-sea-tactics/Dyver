@@ -81,6 +81,7 @@ int main(int argc, char **argv)
 {
     TEST_TEST.run();
     TEST_AMP_DISTRIBUTOR.run();
+    TEST_SERVO.run();
 
     return 0;
 }
