@@ -9,6 +9,7 @@
 #include "networking/server/nwserver.h"
 #include "denseutils.h"
 
+#include "servo.h"
 
 #include "test.h"
 
@@ -57,6 +58,15 @@ static const test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE
     if (approx_eq(req_b->get_allowance(), 1.6667, 0.1) == false) return false;
     if (approx_eq(req_c->get_allowance(), 1.6667, 0.1) == false) return false;
     if (approx_eq(req_d->get_allowance(), 1.6667, 0.1) == false) return false;
+
+    return true;
+});
+
+static const test_t TEST_SERVO = test_t("test_servo", __LINE__, []()
+{
+    servo_t servo = servo_t(9);
+    
+    // Do some testing... try to fail the test
 
     return true;
 });
