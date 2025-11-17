@@ -92,7 +92,7 @@ struct test_t
     /**
      * Run the test and report failure/success in the standard output
      */
-    bool run()
+    bool run() const
     {
         bool res = false;
         try
