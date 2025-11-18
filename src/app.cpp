@@ -17,5 +17,7 @@ void app_t::run()
                 kill();
             }
         }
+
+        // Render widgets
     }
 }
