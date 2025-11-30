@@ -9,6 +9,8 @@
 #include "ui/UI.h"
 #include "ui/camera.h"
 
+#include <memory>
+
 void app_t::run()
 {
     SDL_Init(SDL_INIT_VIDEO);

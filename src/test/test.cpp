@@ -1,13 +1,19 @@
 #include <iostream>
-#include "test.h"
 #include <exception>
 #include <vector>
 #include <iostream>
-#include "../amp_distribution.h"
-#include "../networking/client/nwclient.h"
-#include "../networking/server/nwserver.h"
+#include <cmath>
 
-static test_t TEST_TEST = test_t("test_test", __LINE__, []()
+#include "amp_distribution.h"
+#include "networking/client/nwclient.h"
+#include "networking/server/nwserver.h"
+#include "denseutils.h"
+
+#include "servo.h"
+
+#include "test.h"
+
+static const test_t TEST_TEST = test_t("test_test", __LINE__, []()
 {
     if (1 + 1 == 2)
     {
@@ -19,7 +25,7 @@ static test_t TEST_TEST = test_t("test_test", __LINE__, []()
     }
 });
 
-static test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE__, []()
+static const test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE__, []()
 {
     amp_distributor_t distributor = amp_distributor_t(10.0);
     std::shared_ptr<dynamic_amp_request_t> req_a = distributor.invoke_request(5.0, AMP_REQUEST_PRIORITY::ALWAYS_FULFILL);
@@ -56,10 +62,26 @@ static test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE__, []
     return true;
 });
 
+static const test_t TEST_SERVO = test_t("test_servo", __LINE__, []()
+{
+    servo_t servo = servo_t(9);
+    
+    // Do some testing... try to fail the test
+
+    return true;
+});
+
+/*
+static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
+    quat_from_euler(Eigen::Vector3d());
+});
+*/
+
 int main(int argc, char **argv)
 {
     TEST_TEST.run();
     TEST_AMP_DISTRIBUTOR.run();
+    TEST_SERVO.run();
 
     return 0;
 }
