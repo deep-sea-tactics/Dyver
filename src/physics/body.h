@@ -4,7 +4,6 @@
 #include <Eigen/Dense>
 #include "shape.h"
 
-template <typename S>
 class body_t
 {
 public:
@@ -20,10 +19,19 @@ public:
         rot = rot;
     }
 
-    auto get_shape() -> S
-    {
-        return m_shape;
-    }
+    auto get_shape() -> shape_t& { return m_shape; }
+
+    auto get_pos() -> Eigen::Vector3d& { return m_pos; }
+
+    auto get_rot() -> Eigen::Quaterniond& { return m_rot; }
+
+    auto get_lin_vel() -> Eigen::Vector3d& { return m_lin_vel; }
+    
+    auto get_lin_accel() -> Eigen::Vector3d& { return m_lin_accel; }
+
+    auto get_ang_vel() -> Eigen::Vector3d& { return m_ang_vel; }
+
+    auto get_ang_accel() -> Eigen::Vector3d& { return m_ang_accel; }
     
 private:
     Eigen::Vector3d m_pos{Eigen::Vector3d(0, 0, 0)};
@@ -35,7 +43,7 @@ private:
     Eigen::Vector3d m_ang_vel{Eigen::Vector3d(0, 0,0)};
     Eigen::Vector3d m_ang_accel{Eigen::Vector3d(0, 0, 0)};
 
-    S m_shape;
+    shape_t m_shape;
 };
 
 #endif

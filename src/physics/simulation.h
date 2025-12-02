@@ -11,7 +11,6 @@
 
 const uint64_t DEFAULT_TICK_MS = 10;
 
-template<typename S>
 class simulation_t
 {
 public:
@@ -27,8 +26,12 @@ private:
      * specific shapes
      * 
      */
-    std::vector<body_t<S>> m_bodies{{}};
+    std::vector<body_t> m_bodies{{}};
 
+    /**
+     * @brief Ticks- a unit of time between physics updates
+     * 
+     */
     uint64_t m_ticksize{DEFAULT_TICK_MS};
 };
 

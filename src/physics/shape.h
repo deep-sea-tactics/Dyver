@@ -14,38 +14,31 @@
 class shape_t
 {
 public:
-    /**
-     * @brief Euler moment of inertia for X
-     * 
-     */
-    virtual auto I_x() -> double;
-    
-    /**
-     * @brief Euler moment of inertia for Y
-     * 
-     */
-    virtual auto I_y() -> double;
-
-    /**
-     * @brief Euler moment of inertia for Z
-     * 
-     */
-    virtual auto I_z() -> double;
-
-    auto get_mass() -> double&
+    shape_t(double mass, double I_x, double I_y, double I_z)
     {
-        return m_mass;
+        m_mass = mass;
+        m_I_x = I_x;
+        m_I_y = I_y;
+        m_I_z = I_z;
     }
-protected:
 
-    double m_mass;
+    shape_t() = default;
+protected:
+    double m_I_x{0.0};
+    double m_I_y{0.0};
+    double m_I_z{0.0};
+
+    double m_mass{0.0};
 };
 
 constexpr double ONE_TWELTH = (1.0/12.0);
 
-class rectprism_t : public shape_t
+inline auto I_rectprism(const double &mass, const double x, const double y) -> double
 {
-public:
+    //I_center,L = 1/12 * M * (W^2+H^2)
+    return ONE_TWELTH * mass * (utils::square(x) + utils::square(y));
+}
+/*
     auto I_x() -> double override
     {
         return I(m_w, m_h);
@@ -60,17 +53,15 @@ public:
     {
         return I(m_l, m_h);
     }
-private:
-
-    auto I(double x, double y) -> double
-    {
-        //I_center,L = 1/12 * M * (W^2+H^2)
-        return ONE_TWELTH * m_mass * (utils::square(x) + utils::square(y));
-    }
-
-    double m_w{0.0};
-    double m_h{0.0};
-    double m_l{0.0};
+*/
+inline auto rectprism_factory(const double mass, const double w, const double h, const double l) -> shape_t
+{
+    return shape_t(
+        mass,
+        I_rectprism(mass, w ,h),
+        I_rectprism(mass, l, w),
+        I_rectprism(mass, l, h)
+    );
 };
 
 #endif
