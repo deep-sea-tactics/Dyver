@@ -74,6 +74,25 @@ namespace utils
         std::cout << "\033[0m\n" << std::flush;
     }
 
+    struct linear_percentage_t
+    {
+        double m_max;
+        double m_min;
+
+        linear_percentage_t(const double min, const double max)
+        {
+            m_max = max;
+            m_min = min;
+        }
+
+        auto to_percentage(const double v) -> double
+        {
+            double diff = (m_max - m_min);
+            double inbetween = (v - m_min);
+
+            return (inbetween / diff);
+        }
+    };
 }
 
 #endif

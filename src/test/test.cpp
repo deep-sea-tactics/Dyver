@@ -9,6 +9,8 @@
 #include "networking/server/nwserver.h"
 #include "denseutils.h"
 
+#include "utils.h"
+
 #include "servo.h"
 
 #include "test.h"
@@ -71,6 +73,20 @@ static const test_t TEST_SERVO = test_t("test_servo", __LINE__, []()
     return true;
 });
 
+static const test_t TEST_PWM_THROTTLE = test_t("test_pwm_throttle", __LINE__, []()
+{
+    utils::linear_percentage_t throttle = utils::linear_percentage_t(1000, 1100);
+    double v = throttle.to_percentage(1050);
+
+    if (v != 0.5) return false;
+
+    v = throttle.to_percentage(1075);
+
+    if (v != 0.75) return false;
+
+    return true;
+});
+
 /*
 static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
     quat_from_euler(Eigen::Vector3d());
@@ -82,6 +98,7 @@ int main(int argc, char **argv)
     TEST_TEST.run();
     TEST_AMP_DISTRIBUTOR.run();
     TEST_SERVO.run();
+    TEST_PWM_THROTTLE.run();
 
     return 0;
 }
