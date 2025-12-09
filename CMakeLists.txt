@@ -55,7 +55,7 @@ add_executable(
     ${PROJECT_NAME} 
     src/main.cpp
     src/rov.cpp
-    src/thruster.cpp
+    src/thruster/thruster.cpp
     src/bindable_action.cpp
     src/app.cpp
     src/ui/Button.cpp
