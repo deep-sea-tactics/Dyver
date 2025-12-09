@@ -1,7 +1,7 @@
 #ifndef H_ROV
 #define H_ROV
 
-#include "thruster.h"
+#include "thruster/thruster.h"
 
 class rov_t
 {
