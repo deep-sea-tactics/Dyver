@@ -92,6 +92,12 @@ namespace utils
 
             return (inbetween / diff);
         }
+
+        auto to_value(const double p) -> double
+        {
+            double diff = (m_max - m_min);
+            return m_min + (p * diff);
+        }
     };
 }
 

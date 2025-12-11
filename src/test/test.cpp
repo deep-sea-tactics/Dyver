@@ -75,14 +75,18 @@ static const test_t TEST_SERVO = test_t("test_servo", __LINE__, []()
 
 static const test_t TEST_PWM_THROTTLE = test_t("test_pwm_throttle", __LINE__, []()
 {
-    utils::linear_percentage_t throttle = utils::linear_percentage_t(1000, 1100);
-    double v = throttle.to_percentage(1050);
+    utils::linear_percentage_t throttle = utils::linear_percentage_t(1000.0, 1100.0);
+    double p = throttle.to_percentage(1050.0);
 
-    if (v != 0.5) return false;
+    if (p != 0.5) return false;
 
-    v = throttle.to_percentage(1075);
+    p = throttle.to_percentage(1075.0);
 
-    if (v != 0.75) return false;
+    if (p != 0.75) return false;
+
+    double v = throttle.to_value(p);
+
+    if (v != 1075.0) return false;
 
     return true;
 });
