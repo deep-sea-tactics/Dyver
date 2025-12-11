@@ -58,7 +58,6 @@ add_executable(
     src/thruster/thruster.cpp
     src/bindable_action.cpp
     src/app.cpp
-    src/ui/Button.cpp
     src/physics/body.cpp
     src/physics/simulation.cpp
 )

@@ -95,7 +95,7 @@ public:
      */
     void kill()
     {
-        running = false;
+        m_running = false;
     }
 
 private:
@@ -109,7 +109,7 @@ private:
      * @brief The application's status. This should not be directly set. Instead, use `app_t::kill()`
      * 
      */
-    bool running{true};
+    bool m_running{true};
 };
 
 #endif
