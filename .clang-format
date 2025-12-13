@@ -1,0 +1,15 @@
+Language: Cpp
+BreakBeforeBraces: Allman
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Always
+
+ColumnLimit: 160
+PointerAlignment: Right
+MaxEmptyLinesToKeep: 1
+
+SortIncludes: Never
+AccessModifierOffset: -4
+
+AlignAfterOpenBracket: DontAlign

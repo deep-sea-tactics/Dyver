@@ -9,19 +9,19 @@
 
 void app_t::run()
 {
-    SDL_Init(SDL_INIT_VIDEO);
-    window_helper_t window = window_helper_t("Dyver"); // TODO: Configure version with DSS
+	SDL_Init(SDL_INIT_VIDEO);
+	window_helper_t window = window_helper_t("Dyver"); // TODO: Configure version with DSS
 
-    SDL_Event event;
-    while (m_running) // See app_t declaration
-    {
-        while (SDL_PollEvent(&event)) // Keep polling events for as long as they are coming
-        {
-            if (event.type == SDL_EVENT_QUIT) 
-            {
-            	kill();
-            }
-        }
-        // Render widgets
-    }
+	SDL_Event event;
+	while (m_running) // See app_t declaration
+	{
+		while (SDL_PollEvent(&event)) // Keep polling events for as long as they are coming
+		{
+			if (event.type == SDL_EVENT_QUIT)
+			{
+				kill();
+			}
+		}
+		// Render widgets
+	}
 }
