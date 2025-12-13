@@ -8,7 +8,7 @@ void rov_t::optimize_throttle_config(Eigen::Vector3d target_translational, Eigen
 {
 	for (auto p_thruster : m_thrusters)
 	{
-		optimize_thruster(p_thruster, target_translational);
+		optimize_thruster(p_thruster, target_translational, target_rotational);
 	}
 }
 
