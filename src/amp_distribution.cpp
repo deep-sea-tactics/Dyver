@@ -10,9 +10,9 @@ auto amp_distributor_t::invoke_request(const double request, const AMP_REQUEST_P
 	return new_request;
 }
 
-auto amp_distributor_t::tally_by_priority(const AMP_REQUEST_PRIORITY which) -> uint32_t
+auto amp_distributor_t::tally_by_priority(const AMP_REQUEST_PRIORITY which) -> std::uint32_t
 {
-	uint32_t res;
+	std::uint32_t res = 0;
 
 	for (auto request : m_active_requests)
 	{
@@ -72,13 +72,13 @@ void amp_distributor_t::compute()
 	if (p_min_request == nullptr)
 		return; // Also implies that there are no dynamic requests
 
-	uint32_t ndynamic_requests = tally_by_priority(AMP_REQUEST_PRIORITY::DISTRIBUTE);
-	uint32_t unfulfilled_requests = ndynamic_requests;
+	std::uint32_t ndynamic_requests = tally_by_priority(AMP_REQUEST_PRIORITY::DISTRIBUTE);
+	std::uint32_t unfulfilled_requests = ndynamic_requests;
 	double distributed;
 
 	// Brief: Start by evenly distributing amperage, collect leftovers from smaller
 	// requests, then distribute that among the other requests.
-	for (int i = 0; i < ndynamic_requests; i++)
+	for (std::uint32_t i = 0; i < ndynamic_requests; i++)
 	{
 		for (auto request : m_active_requests)
 		{

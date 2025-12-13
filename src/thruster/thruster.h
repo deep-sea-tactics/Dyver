@@ -21,6 +21,7 @@ public:
 
 	auto get_pos() -> Eigen::Vector3d & { return m_pos; }
 	auto get_look() -> Eigen::Vector3d & { return m_look; }
+	auto get_force() -> double & { return m_force; }
 
 private:
 	/**

@@ -33,7 +33,7 @@ inline bool approx_eq(double lhs, double rhs, double tolerance)
  *
  * @see test_t
  */
-inline void notification_test_passed(std::string id, uint64_t line) // Yes, it's inline IO.
+inline void notification_test_passed(std::string id) // Yes, it's inline IO.
 {
 	std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;
 }
@@ -47,7 +47,7 @@ inline void notification_test_passed(std::string id, uint64_t line) // Yes, it's
  *
  * @see test_t
  */
-inline void notification_test_failed(std::string id, uint64_t line, bool is_err) // Yes, it's inline IO.
+inline void notification_test_failed(std::string id, bool is_err) // Yes, it's inline IO.
 {
 	if (is_err == true)
 	{
@@ -101,21 +101,21 @@ struct test_t
 
 			if (res == true)
 			{
-				notification_test_passed(m_id, m_line);
+				notification_test_passed(m_id);
 			}
 			else if (res == false)
 			{
-				notification_test_failed(m_id, m_line, false);
+				notification_test_failed(m_id, false);
 			}
 		}
 		catch (const std::exception &e)
 		{
-			notification_test_failed(m_id, m_line, true);
+			notification_test_failed(m_id, true);
 			std::cout << e.what();
 		}
 		catch (const int &code)
 		{
-			notification_test_failed(m_id, m_line, true);
+			notification_test_failed(m_id, true);
 			std::cout << "Error code: " << code;
 		}
 

@@ -4,6 +4,9 @@
 
 cmake_minimum_required(VERSION 3.16)
 project(Dyver VERSION 0.0.0 LANGUAGES CXX)
+
+add_compile_options(-Wpedantic -Wall -Wextra)
+
 include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -52,7 +55,7 @@ FetchContent_MakeAvailable(matplotplusplus)
 add_subdirectory(src/test)
 
 add_executable(
-    ${PROJECT_NAME} 
+    ${PROJECT_NAME}
     src/main.cpp
     src/rov.cpp
     src/thruster/thruster.cpp

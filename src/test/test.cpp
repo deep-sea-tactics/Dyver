@@ -111,7 +111,7 @@ static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
 });
 */
 
-int main(int argc, char **argv)
+auto main() -> int
 {
 	TEST_TEST.run();
 	TEST_AMP_DISTRIBUTOR.run();

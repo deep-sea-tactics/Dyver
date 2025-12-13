@@ -13,7 +13,7 @@ void command_line(DSS::Executor *p_exec)
 	cli.init();
 }
 
-int main(int argv, char **argc)
+auto main() -> int
 {
 	DSS::Environment env = DSS::Environment();
 

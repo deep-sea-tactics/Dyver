@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(DyverTest)
 
+add_compile_options(-Wpedantic -Wall -Wextra)
+
 add_executable(
     ${PROJECT_NAME}
     test.cpp
