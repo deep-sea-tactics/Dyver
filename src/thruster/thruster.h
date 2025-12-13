@@ -13,15 +13,17 @@
 class thruster_t
 {
 public:
-	thruster_t(const Eigen::Vector3d pos, const Eigen::Vector3d look)
+	thruster_t(const Eigen::Vector3d pos, const Eigen::Vector3d look, const double force)
 	{
 		m_pos = pos;
 		m_look = look;
+		m_force = force;
 	}
 
 	auto get_pos() -> Eigen::Vector3d & { return m_pos; }
 	auto get_look() -> Eigen::Vector3d & { return m_look; }
 	auto get_force() -> double & { return m_force; }
+	auto get_throttle() -> double & { return m_throttle; }
 
 private:
 	/**
@@ -29,6 +31,8 @@ private:
 	 *
 	 */
 	double m_force;
+
+	double m_throttle;
 
 	Eigen::Vector3d m_pos{Eigen::Vector3d(0, 0, 0)};
 	Eigen::Vector3d m_look{Eigen::Vector3d(0, 0, 0)}; // Tada! Thrusters are very simple...

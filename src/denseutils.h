@@ -6,8 +6,11 @@
 #ifndef H_DENSE_UTILS
 #define H_DENSE_UTILS
 
-#include <Eigen/Dense>
 #include <cmath>
+#include <sstream>
+#include <string>
+
+#include <Eigen/Dense>
 
 constexpr double ONE_HALF = 0.5;
 
@@ -37,6 +40,18 @@ inline auto quat_from_euler(Eigen::Vector3d euler) -> Eigen::Quaterniond
 	// clang-format on
 
 	return res;
+}
+
+inline auto fmt_vector3d(const Eigen::Vector3d &which) -> std::string
+{
+	std::stringstream fmt;
+	fmt << '(';
+	fmt << which.x() << ' ';
+	fmt << which.y() << ' ';
+	fmt << which.z();
+	fmt << ')';
+
+	return fmt.str();
 }
 
 #endif

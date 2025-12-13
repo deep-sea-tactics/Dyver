@@ -8,6 +8,7 @@ add_executable(
     ${PROJECT_NAME}
     test.cpp
     ../amp_distribution.cpp
+    ../rov.cpp
 )
 
 target_include_directories(

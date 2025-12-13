@@ -35,7 +35,7 @@ inline bool approx_eq(double lhs, double rhs, double tolerance)
  */
 inline void notification_test_passed(std::string id) // Yes, it's inline IO.
 {
-	std::cout << "\033[32m Test [" << id << "] passed without error." << std::endl;
+	std::cout << "\033[32mTest [" << id << "] passed without error." << std::endl;
 }
 
 /**

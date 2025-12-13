@@ -9,6 +9,8 @@
 #include "networking/server/nwserver.h"
 #include "denseutils.h"
 
+#include "rov.h"
+
 #include "utils.h"
 
 #include "servo.h"
@@ -105,6 +107,23 @@ static const test_t TEST_PWM_THROTTLE = test_t("test_pwm_throttle", __LINE__,
 		return true;
 	});
 
+static const test_t TEST_ABSTRACT_ROV = test_t("test_abstract_rov", __LINE__,
+	[]()
+	{
+		rov_t rov = rov_t();
+		const double FORCE = 28.63542; // Roughly approximation of a BlueRobotics T200 Thruster maximmum output
+
+		// A terribly impractical ROV... but mathematically simple and easy to test
+		rov.create_thruster({1.0, 0, 0}, {0, 1, 0}, FORCE);
+		rov.create_thruster({-1.0, 0, 0}, {0, 1, 0}, FORCE);
+		rov.create_thruster({0, 0, 1.0}, {0, 0, 1}, FORCE);
+		rov.create_thruster({0, 0, -1.0}, {0, 0, 1}, FORCE);
+
+		rov.optimize_throttle_config({0, 3, 0}, {0, 0, 0});
+
+		return true;
+	});
+
 /*
 static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
 	quat_from_euler(Eigen::Vector3d());
@@ -117,6 +136,7 @@ auto main() -> int
 	TEST_AMP_DISTRIBUTOR.run();
 	TEST_SERVO.run();
 	TEST_PWM_THROTTLE.run();
+	TEST_ABSTRACT_ROV.run();
 
 	return 0;
 }
