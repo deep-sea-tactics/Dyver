@@ -17,12 +17,11 @@ void rov_t::optimize_thruster(std::shared_ptr<thruster_t> which, Eigen::Vector3d
 	Eigen::Vector3d &look = which->get_look();
 	Eigen::Vector3d &pos = which->get_pos();
 
-	// Target relative to thruster (which is, itself, relative to the ROV centroid)
-	const Eigen::Vector3d in_local = (target_translational - pos);
-
 	// Thruster lookat target
-	const Eigen::Vector3d lookat = in_local.normalized();
+	const Eigen::Vector3d lookat = target_translational.normalized();
 
 	const double dot = lookat.dot(look);
 	which->get_throttle() = dot;
+
+	std::cout << dot << std::endl;
 }
