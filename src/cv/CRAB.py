@@ -7,8 +7,9 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import mathplotlib.pyplot as plt
 
-#get dataset
-dataset = "https://universe.roboflow.com/mate-rov-v2-2026/mate-rov-2026-european-green-crab-computer-vision-model-vkrz4"
+#get dataset(IT HAS A LICENSE THOUGH IDK HOW TO REFERENCE IT)
+dataset = "https://universe.roboflow.com/mate-rov-v2-2026/mate-rov-2026-european-green-crab-computer-vision-model-vkrz4" 
+
 #transfer learn
 
 #test epoch ==10
