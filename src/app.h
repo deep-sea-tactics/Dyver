@@ -16,100 +16,81 @@
 
 #include <SDL3/SDL.h>
 
-
 /*
 Thanks https://www.studyplan.dev/sdl3/sdl3-application-loop for the resources.
 */
 
-class window_helper_t 
+class window_helper_t
 {
 public:
-    /**
-     * @brief Construct a new window helper t object
-     * 
-     * @param title Title of the window
-     */
-    window_helper_t(std::string title)
-    {
-        SDLWindow = SDL_CreateWindow(
-            title.c_str(),
-            700, 300, 0
-        );
+	/**
+	 * @brief Construct a new window helper t object
+	 *
+	 * @param title Title of the window
+	 */
+	window_helper_t(std::string title)
+	{
+		SDLWindow = SDL_CreateWindow(title.c_str(), 700, 300, 0);
 
-        const auto* Fmt = SDL_GetPixelFormatDetails(
-            get_surface()->format
-        );
+		const auto *Fmt = SDL_GetPixelFormatDetails(get_surface()->format);
 
-        SDL_FillSurfaceRect(
-            get_surface(),
-            nullptr,
-            SDL_MapRGB(Fmt, nullptr, 50, 50, 50)
-        );
+		SDL_FillSurfaceRect(get_surface(), nullptr, SDL_MapRGB(Fmt, nullptr, 50, 50, 50));
 
-        SDL_UpdateWindowSurface(SDLWindow);
-    }
+		SDL_UpdateWindowSurface(SDLWindow);
+	}
 
-    /**
-     * @brief Get the surface object
-     * 
-     * @return SDL_Surface* 
-     */
-    SDL_Surface* get_surface() const 
-    {
-        return SDL_GetWindowSurface(SDLWindow);
-    }
+	/**
+	 * @brief Get the surface object
+	 *
+	 * @return SDL_Surface*
+	 */
+	SDL_Surface *get_surface() const { return SDL_GetWindowSurface(SDLWindow); }
 
-    // Prevent copying of the window
-    window_helper_t(const window_helper_t&) = delete;
-    window_helper_t& operator=(const window_helper_t&) = delete;
+	// Prevent copying of the window
+	window_helper_t(const window_helper_t &) = delete;
+	window_helper_t &operator=(const window_helper_t &) = delete;
 
-    ~window_helper_t() 
-    {
-        if (SDLWindow && SDL_WasInit(SDL_INIT_VIDEO)) 
-        {
-            SDL_DestroyWindow(SDLWindow);
-        }
-    }
+	~window_helper_t()
+	{
+		if (SDLWindow && SDL_WasInit(SDL_INIT_VIDEO))
+		{
+			SDL_DestroyWindow(SDLWindow);
+		}
+	}
 
 private:
-    SDL_Window* SDLWindow{nullptr};
+	SDL_Window *SDLWindow{nullptr};
 };
 
 /**
  * @brief The heart of Dyver
- * 
+ *
  */
 class app_t
 {
 public:
-    app_t(DSS::Executor *p_exec)
-    {
-        m_p_exec = p_exec;
-    }
+	app_t(DSS::Executor *p_exec) { m_p_exec = p_exec; }
 
-    void run();
+	void run();
 
-    /**
-     * @brief Kills the application
-     * 
-     */
-    void kill()
-    {
-        running = false;
-    }
+	/**
+	 * @brief Kills the application
+	 *
+	 */
+	void kill() { m_running = false; }
 
 private:
-    /**
-     * @brief Pointer to a DSS executor, in case any DSS scripts need running
-     * 
-     */
-    DSS::Executor *m_p_exec{nullptr};
+	/**
+	 * @brief Pointer to a DSS executor, in case any DSS scripts need running
+	 *
+	 */
+	DSS::Executor *m_p_exec{nullptr};
 
-    /**
-     * @brief The application's status. This should not be directly set. Instead, use `app_t::kill()`
-     * 
-     */
-    bool running{true};
+	/**
+	 * @brief The application's status. This should not be directly set. Instead, use `app_t::kill()`
+	 *
+	 */
+	bool m_running{true};
 };
 
 #endif

@@ -26,21 +26,4 @@ private:
     ui_pos_t m_pos{0.0, 0.0};
 };
 
-
-
-
-/*
-class ui_pos_t():
-    def __init__(x: float, y: float):
-        self.x = x
-        self.y = y
-
-class widget_t():
-    def __init__(x: float, y: float):
-        self.m_pos = ui_pos_t(x, y)
-    
-    def get_pos() -> ui_pos_t:
-        return self.m_pos
-*/
-
 #endif

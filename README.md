@@ -5,4 +5,11 @@ Dyver is a consolidation of core Deep Sea Tactics robot features into one applic
 Binaries are re-configured using the Deep Sea Shell (dss) scripting language. The program is written in C++, and assumes users are building with CMake and Clang.
 
 ## Installation Instructions
-Ensure you have up-to-date CMake and Clang distributions installed on the local machine. **Note: this program functions best with the Linux (specifically Debian) operating system.** `deps.sh` contains nececssary dependencies to have installed on your machine before building, and `build_essentials.sh` contains highly-recommended/required dependencies as well. **An internet connection is required for a first build of Dyver.**
+
+1. Build on Debian Linux! This means installing WSL (for Windows developers, if you haven't already), or using a Debian Linux machine.
+Debian is the target operating system for all parts of Dyver, and it is important to do work on Debian to maintain consistency. Windows
+support is not a planned feature.
+
+2. Ensure you have an up-to-date installation of `clang` and `cmake`. In addition to these, you will want to install `gnuplot` and `libpng-dev`
+
+3. Build with an internet connection. The two main targets are `Dyver` *(for the on-deck server and graphical user interface)* and `DyverTest` *(which contains every unit test)*.
