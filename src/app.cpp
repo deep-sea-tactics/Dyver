@@ -5,6 +5,7 @@
 #include "app.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include "SDL3/SDL_render.h"
 #include "ui/Window.h"
 #include "ui/UI.h"
 #include "ui/camera.h"
@@ -17,6 +18,7 @@ void app_t::run()
     //window_helper_t window = window_helper_t("Dyver"); // TODO: Configure version with DSS
     UI UIManager;
     Window GameWindow;
+    //CameraFeed camera;
 
     bool running = true; //
 
@@ -31,6 +33,8 @@ void app_t::run()
                 running = false; //
             }
         }
+
+        //camera.openCamera();
 
       
 

@@ -1,5 +1,4 @@
-#ifndef CAMERAFEED_H
-#define CAMERAFEED_H
+
 
 #include <SDL3/SDL.h>
 #include <string>
@@ -23,4 +22,4 @@ private:
     int cameraIndex;
 };
 
-#endif // CAMERAFEED_H
+

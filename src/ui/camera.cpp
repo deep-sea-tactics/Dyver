@@ -29,12 +29,8 @@ bool CameraFeed::openCamera() {
 
     // Open the camera device, requesting RGBA8888 format for compatibility
     // The API will attempt conversion if the native format differs
-    SDL_CameraSpec spec = {
-        .format = SDL_PIXELFORMAT_RGBA8888,
-        .width = 640,
-        .height = 480,
-    };
-    SDL_Camera *camera = SDL_OpenCamera(deviceNames[cameraIndex], &spec);
+
+    SDL_Camera *camera = SDL_OpenCamera(deviceNames[cameraIndex], NULL);
     SDL_free(deviceNames);
 
     if (!camera) {
