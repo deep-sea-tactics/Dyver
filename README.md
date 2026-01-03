@@ -1,3 +1,5 @@
+![alt text](https://github.com/deep-sea-tactics/Dyver/blob/main/dyver_light.png "Dyver Logo")
+
 # Dyver
 Dyver is a consolidation of core Deep Sea Tactics robot features into one application. This includes drivers, interfaces, simulations, and various other tools.
 
