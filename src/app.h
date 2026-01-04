@@ -69,7 +69,7 @@ private:
 class app_t
 {
 public:
-	app_t(DSS::Executor *p_exec) { m_p_exec = p_exec; }
+	app_t(DSS::executor_t *p_exec) { m_p_exec = p_exec; }
 
 	void run();
 
@@ -84,7 +84,7 @@ private:
 	 * @brief Pointer to a DSS executor, in case any DSS scripts need running
 	 *
 	 */
-	DSS::Executor *m_p_exec{nullptr};
+	DSS::executor_t *m_p_exec{nullptr};
 
 	/**
 	 * @brief The application's status. This should not be directly set. Instead, use `app_t::kill()`

@@ -1,7 +1,3 @@
-#include <iostream>
-#include <exception>
-#include <vector>
-#include <iostream>
 #include <cmath>
 
 #include "amp_distribution.h"
