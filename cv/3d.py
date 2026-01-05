@@ -14,3 +14,6 @@ import mathplotlib.pyplot as plt
 
 
 #use with cv2
+
+#this prolly do last cuz just gotta integrate open3d with cv2 and midas
+# no dataset needed but idk if we can use that 
