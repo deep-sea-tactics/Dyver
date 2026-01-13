@@ -109,8 +109,10 @@ static const test_t TEST_ABSTRACT_ROV = test_t("test_abstract_rov", __LINE__,
 		rov_t rov = rov_t();
 		const double FORCE = 28.63542; // Roughly approximation of a BlueRobotics T200 Thruster maximmum output
 
+		const double sqrt22 = sqrt(2) / 2;
+
 		// A terribly impractical ROV... but mathematically simple and easy to test
-		rov.create_thruster({1.0, 0, 0}, {0, 1, 0}, FORCE);
+		rov.create_thruster({1.0, 0, 0}, {0.0, 1.0, 0.0}, FORCE);
 		rov.create_thruster({-1.0, 0, 0}, {0, 1, 0}, FORCE);
 		rov.create_thruster({0, 0, 1.0}, {0, 0, 1}, FORCE);
 		rov.create_thruster({0, 0, -1.0}, {0, 0, 1}, FORCE);
@@ -125,7 +127,6 @@ static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
 	quat_from_euler(Eigen::Vector3d());
 });
 */
-
 auto main() -> int
 {
 	TEST_TEST.run();
