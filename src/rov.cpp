@@ -1,5 +1,5 @@
 #include "denseutils.h"
-#include "utils.h"
+#include <iostream>
 
 #include "rov.h"
 
@@ -26,8 +26,11 @@ void rov_t::optimize_thruster(std::shared_ptr<thruster_t> which, Eigen::Vector3d
 	which->get_throttle() = dot;
 
 	const Eigen::Vector3d calc_torque = pos.cross(look);
-	std::cout << pos << std::endl;
-	std::cout << look << std::endl;
-	std::cout << calc_torque << std::endl;
+
+	std::cout << "Position of the thruster:\n" << pos << std::endl;
+	std::cout << std::endl;
+	std::cout << "Look of the thruster:\n" << look << std::endl;
+	std::cout << std::endl;
+	std::cout << "Calculated torque production:\n" << calc_torque << std::endl;
 	std::cout << std::endl;
 }

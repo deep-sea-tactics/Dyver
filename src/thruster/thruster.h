@@ -27,7 +27,7 @@ public:
 
 private:
 	/**
-	 * @brief Linearly scaled "maximum" force output of the thruster.
+	 * @brief Linearly scaled "maximum" force output of the thruster. In newtons.
 	 *
 	 */
 	double m_force;

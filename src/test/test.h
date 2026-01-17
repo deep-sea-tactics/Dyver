@@ -111,12 +111,12 @@ struct test_t
 		catch (const std::exception &e)
 		{
 			notification_test_failed(m_id, true);
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 		catch (const int &code)
 		{
 			notification_test_failed(m_id, true);
-			std::cout << "Error code: " << code;
+			std::cout << "Error code: " << code << std::endl;
 		}
 
 		std::cout << "      Traceback to line " << int(m_line) << std::endl << std::endl;

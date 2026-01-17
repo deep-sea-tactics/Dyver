@@ -112,12 +112,18 @@ static const test_t TEST_ABSTRACT_ROV = test_t("test_abstract_rov", __LINE__,
 		const double sqrt22 = sqrt(2) / 2;
 
 		// A terribly impractical ROV... but mathematically simple and easy to test
-		rov.create_thruster({1.0, 0, 0}, {0.0, 1.0, 0.0}, FORCE);
-		rov.create_thruster({-1.0, 0, 0}, {0, 1, 0}, FORCE);
-		rov.create_thruster({0, 0, 1.0}, {0, 0, 1}, FORCE);
-		rov.create_thruster({0, 0, -1.0}, {0, 0, 1}, FORCE);
-
+		rov.create_thruster({4.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, FORCE);
+		rov.create_thruster({-4.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, FORCE);
+		rov.create_thruster({0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, FORCE);
+		rov.create_thruster({0.0, 0.0, -1.0}, {0.0, 0.0, 1.0}, FORCE);
 		rov.optimize_throttle_config({0, 3, 0}, {0, 0, 0});
+		std::cout << "Unbalanced Torque:\n" << rov.calculate_unbalanced_torque() << std::endl;
+
+		rov.create_thruster({1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, FORCE);
+		if (rov.calculate_unbalanced_torque().y() != -1.0)
+		{
+			return false;
+		}
 
 		return true;
 	});

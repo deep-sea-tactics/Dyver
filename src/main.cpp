@@ -13,8 +13,11 @@ void command_line(std::shared_ptr<DSS::executor_t> p_exec)
 	cli.init();
 }
 
-auto main() -> int
+auto main(int argv, char **argc) -> int
 {
+	(void)argv;
+	(void)argc;
+
 	DSS::environment_t env = DSS::environment_t();
 
 	env.init();

@@ -1,11 +1,10 @@
 #ifndef H_ROV
 #define H_ROV
 
-#include <vector>
 #include <memory>
 
+#include "denseutils.h"
 #include "utils.h"
-
 #include "geometry/rectprism.h"
 
 #include "amp_distribution.h"
@@ -14,6 +13,9 @@
 class rov_t
 {
 public:
+	explicit rov_t() {}
+	~rov_t() {}
+
 	/**
 	 * @brief Create a thruster object
 	 *
@@ -22,8 +24,31 @@ public:
 	 */
 	void create_thruster(const Eigen::Vector3d pos, const Eigen::Vector3d look, const double force)
 	{
+		ensure_is_unit(look);
+
 		std::shared_ptr<thruster_t> new_thruster = std::make_shared<thruster_t>(pos, look, force);
 		m_thrusters.push_back(new_thruster);
+	}
+
+	auto calculate_unbalanced_torque() -> Eigen::Vector3d
+	{
+		if (m_thrusters.size() == 0)
+		{
+			utils::log("(rov) No thrusters, cannot calculate torque.", utils::MSG_TYPE::WARN);
+		}
+
+		Eigen::Vector3d sum = Eigen::Vector3d(0, 0, 0);
+
+		for (auto thruster : m_thrusters)
+		{
+			Eigen::Vector3d &look = thruster->get_look();
+			Eigen::Vector3d &pos = thruster->get_pos();
+
+			const Eigen::Vector3d tau = pos.cross(look);
+			sum += tau;
+		}
+
+		return sum;
 	}
 
 	/**

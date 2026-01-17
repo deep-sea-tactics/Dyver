@@ -6,6 +6,8 @@
 #ifndef H_DENSE_UTILS
 #define H_DENSE_UTILS
 
+#include "utils.h"
+
 #include <cmath>
 #include <sstream>
 #include <string>
@@ -13,6 +15,18 @@
 #include <Eigen/Dense>
 
 constexpr double ONE_HALF = 0.5;
+
+inline void ensure_is_unit(Eigen::Vector3d what)
+{
+	if (std::abs(what.sum()) == 1.0)
+	{
+		return;
+	}
+
+	std::stringstream msg;
+	msg << "(is_unit) Vector is not a unit vector. (" << what.x() << " " << what.y() << " " << what.z() << ")";
+	utils::log(msg.str(), utils::WARN);
+}
 
 /**
  * @brief Produce a quaternion from an euler value
