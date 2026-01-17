@@ -3,6 +3,12 @@
 # Dyver
 Dyver is a consolidation of core Deep Sea Tactics robot features into one application. This includes drivers, interfaces, simulations, and various other tools.
 
+## For Developers
+Useful information for developers working internally on Dyver.
+
+* Units of Measurement
+All units follow the SI standard. Units that do not follow this standard shall be converted into the standard before being placed into any data structures.
+
 ## Usage
 Binaries are re-configured using the Deep Sea Shell (dss) scripting language. The program is written in C++, and assumes users are building with CMake and Clang.
 
