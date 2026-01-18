@@ -30,7 +30,7 @@ public:
 		m_thrusters.push_back(new_thruster);
 	}
 
-	auto calculate_unbalanced_torque() -> Eigen::Vector3d
+	auto calculate_unbalanced_torque(const bool factor_throttle = false) -> Eigen::Vector3d
 	{
 		if (m_thrusters.size() == 0)
 		{
@@ -44,7 +44,13 @@ public:
 			Eigen::Vector3d &look = thruster->get_look();
 			Eigen::Vector3d &pos = thruster->get_pos();
 
-			const Eigen::Vector3d tau = pos.cross(look);
+			Eigen::Vector3d tau = pos.cross(look);
+
+			if (factor_throttle)
+			{
+				tau *= thruster->get_output();
+			}
+
 			sum += tau;
 		}
 

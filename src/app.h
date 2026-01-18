@@ -14,8 +14,6 @@
 
 #include <string>
 
-#include <SDL3/SDL.h>
-
 /*
 Thanks https://www.studyplan.dev/sdl3/sdl3-application-loop for the resources.
 */
