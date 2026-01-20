@@ -2,7 +2,7 @@
 #define H_THRUSTER
 
 #include <memory>
-#include <vector>
+#include <map>
 
 #include <Eigen/Dense>
 
@@ -59,6 +59,8 @@ public:
 	 */
 	auto get_output() -> double { return m_throttle * m_force; }
 
+	auto get_target_congruence() -> double & { return m_target_congruence; }
+
 private:
 	/**
 	 * @brief Linearly scaled "maximum" force output of the thruster. In newtons.
@@ -66,12 +68,19 @@ private:
 	 */
 	double m_force;
 
+	/**
+	 * @brief On a scale of -1.0 to 1.0, how congruent is this thruster
+	 * with the target force/torque
+	 *
+	 */
+	double m_target_congruence;
+
 	double m_throttle;
 
 	Eigen::Vector3d m_pos{Eigen::Vector3d(0, 0, 0)};
 	Eigen::Vector3d m_look{Eigen::Vector3d(0, 0, 0)}; // Tada! Thrusters are very simple...
 };
 
-typedef std::vector<std::shared_ptr<thruster_t>> thrusters_t;
+typedef std::map<std::string, std::shared_ptr<thruster_t>> thrusters_t;
 
 #endif

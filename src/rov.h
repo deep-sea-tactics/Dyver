@@ -22,12 +22,12 @@ public:
 	 * @param pos Position of the thruster
 	 * @param look Look vector of the thruster (thrusters are really simple!)
 	 */
-	void create_thruster(const Eigen::Vector3d pos, const Eigen::Vector3d look, const double force)
+	void create_thruster(const Eigen::Vector3d pos, const Eigen::Vector3d look, const double force, const std::string id)
 	{
 		ensure_is_unit(look);
 
 		std::shared_ptr<thruster_t> new_thruster = std::make_shared<thruster_t>(pos, look, force);
-		m_thrusters.push_back(new_thruster);
+		m_thrusters[id] = new_thruster;
 	}
 
 	auto calculate_unbalanced_torque(const bool factor_throttle = false) -> Eigen::Vector3d
@@ -39,7 +39,7 @@ public:
 
 		Eigen::Vector3d sum = Eigen::Vector3d(0, 0, 0);
 
-		for (auto thruster : m_thrusters)
+		for (auto [id, thruster] : m_thrusters)
 		{
 			Eigen::Vector3d &look = thruster->get_look();
 			Eigen::Vector3d &pos = thruster->get_pos();
@@ -65,6 +65,13 @@ public:
 	 * world space.
 	 */
 	void optimize_throttle_config(Eigen::Vector3d target, Eigen::Vector3d target_rotational);
+
+	/**
+	 * @brief Obtain a reference to the internal thruster map of this ROV
+	 *
+	 * @return thrusters_t&
+	 */
+	auto get_thrusters() -> thrusters_t & { return m_thrusters; }
 
 private:
 	thrusters_t m_thrusters = {};
