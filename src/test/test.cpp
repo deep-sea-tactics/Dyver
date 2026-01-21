@@ -1,9 +1,14 @@
+#include <chrono>
 #include <cmath>
+#include <string>
+#include <thread>
 
 #include "amp_distribution.h"
 #include "networking/client/nwclient.h"
 #include "networking/server/nwserver.h"
 #include "denseutils.h"
+
+#include "networking/socket_helper.h"
 
 #include "rov.h"
 
@@ -159,6 +164,58 @@ static const test_t TEST_ABSTRACT_ROV = test_t("test_abstract_rov", __LINE__,
 		return true;
 	});
 
+static bool TEST_SOCKET_HELPER_SUCCEEDED = true;
+static std::string TEST_SOCKET_HELPER_CURRENT = "";
+
+static void run_server()
+{
+	listen_socket_t server = listen_socket_t(
+		[](const std::string s)
+		{
+			std::cout << "Recieved: " << s << std::endl;
+			if (TEST_SOCKET_HELPER_CURRENT != s)
+			{
+				TEST_SOCKET_HELPER_SUCCEEDED = false;
+			}
+		});
+
+	server.initialize(PORT_DSS);
+
+	server.accept_n(1);
+
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	server.kill();
+}
+
+static void run_client()
+{
+	send_socket_t client = send_socket_t();
+	client.connect_to(PORT_DSS, "127.0.0.1");
+	TEST_SOCKET_HELPER_CURRENT = "Check it out";
+	client.tx(TEST_SOCKET_HELPER_CURRENT.c_str());
+	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	TEST_SOCKET_HELPER_CURRENT = "I'm in the house";
+	client.tx(TEST_SOCKET_HELPER_CURRENT.c_str());
+	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	TEST_SOCKET_HELPER_CURRENT = "Like carpet";
+	client.tx(TEST_SOCKET_HELPER_CURRENT.c_str());
+
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	client.kill();
+}
+
+static const test_t TEST_SOCKET_HELPER = test_t("test_socket_helper", __LINE__,
+	[]()
+	{
+		std::thread server_handle(run_server);
+		std::this_thread::yield();
+		std::thread client_handle(run_client);
+
+		server_handle.join();
+		client_handle.join();
+		return TEST_SOCKET_HELPER_SUCCEEDED;
+	});
+
 /*
 static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
 	quat_from_euler(Eigen::Vector3d());
@@ -171,6 +228,7 @@ auto main() -> int
 	TEST_SERVO.run();
 	TEST_PWM_THROTTLE.run();
 	TEST_ABSTRACT_ROV.run();
+	TEST_SOCKET_HELPER.run();
 
 	return 0;
 }

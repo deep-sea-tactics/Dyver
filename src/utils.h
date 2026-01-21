@@ -32,7 +32,8 @@ constexpr double KILOU_T_U = (1.0e3);
 enum MSG_TYPE
 {
 	INFO,
-	WARN
+	WARN,
+	ERROR
 };
 
 /**
@@ -62,6 +63,12 @@ static void log(std::string s, MSG_TYPE type = MSG_TYPE::INFO)
 	case (MSG_TYPE::INFO):
 	{
 		std::cout << "\033[0m[info] ";
+		break;
+	}
+
+	case (MSG_TYPE::ERROR):
+	{
+		std::cout << "\033[91m[error] ";
 		break;
 	}
 	}
