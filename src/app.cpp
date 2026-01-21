@@ -1,9 +1,5 @@
-#include <memory>
-
 #include "SDL3/SDL_events.h"
 #include "SDL3/SDL_init.h"
-#include "SDL3/SDL.h"
-#include "SDL3/SDL_main.h"
 
 #include "app.h"
 

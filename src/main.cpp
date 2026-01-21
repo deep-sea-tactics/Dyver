@@ -1,7 +1,6 @@
 #include "dss/runtime.h"
 #include "dss/DSS.h"
 
-#include <iostream>
 #include <thread>
 
 #include "app.h"

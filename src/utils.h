@@ -50,7 +50,7 @@ inline auto square(const double n) -> double { return n * n; }
  * @param type The type of the message (e.g. MSG_TYPE::WARN)
  * @param s The string message to output
  */
-static void log(std::string s, MSG_TYPE type = MSG_TYPE::INFO)
+inline void log(std::string s, MSG_TYPE type = MSG_TYPE::INFO)
 {
 	switch (type)
 	{

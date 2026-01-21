@@ -26,8 +26,6 @@
 #include <map>
 #include <sstream>
 
-#include <memory>
-
 #include "utils.h"
 
 #define PROTOCOL_AUTO 0

@@ -7,8 +7,9 @@
 #ifndef H_APP
 #define H_APP
 
-#include "SDL3/SDL.h"
-#include "dss/DSS.h"
+#include "SDL3/SDL_video.h"
+#include "SDL3/SDL_init.h"
+
 #include "dss/runtime.h"
 #include "utils.h"
 

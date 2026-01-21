@@ -4,9 +4,7 @@
 #include <thread>
 
 #include "amp_distribution.h"
-#include "networking/client/nwclient.h"
 #include "networking/server/nwserver.h"
-#include "denseutils.h"
 
 #include "networking/socket_helper.h"
 
@@ -80,6 +78,7 @@ static const test_t TEST_SERVO = test_t("test_servo", __LINE__,
 	[]()
 	{
 		servo_t servo = servo_t(9);
+		(void)servo;
 
 		// Do some testing... try to fail the test
 
@@ -113,8 +112,6 @@ static const test_t TEST_ABSTRACT_ROV = test_t("test_abstract_rov", __LINE__,
 	{
 		rov_t rov = rov_t();
 		const double FORCE = 28.63542; // Roughly approximation of a BlueRobotics T200 Thruster maximmum output
-
-		const double sqrt22 = sqrt(2) / 2;
 
 		// A terribly impractical ROV... but mathematically simple and easy to test
 		rov.create_thruster({4.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, FORCE, "EastUp");
