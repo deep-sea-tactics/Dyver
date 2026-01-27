@@ -1,7 +1,7 @@
 ![alt text](https://github.com/deep-sea-tactics/Dyver/blob/main/dyver_light.png "Dyver Logo")
 
 # Dyver
-Dyver is an application designed to aid in the operation of an ROV, and contains necessary drivers and mathematics.
+Dyver is an application designed to aid in the operation of an ROV, and contains necessary drivers and mathematics. It additionally will have features for MATE ROV tasks.
 
 ## For Developers
 Useful information for developers working internally on Dyver.
