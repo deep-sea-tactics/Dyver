@@ -2,59 +2,107 @@
 #include "SDL3/SDL_init.h"
 #include "SDL3/SDL_render.h"
 
-//#include "app.h"
+#include "app.h"
 #include "SDL3/SDL_video.h"
-#include "ui/camera.h"
+//#include "ui/camera.h"
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_main.h>
 
 
-int main()
-//void app_t::run()
+static SDL_Texture *texture = NULL;
+static SDL_Renderer *renderer = NULL;
+SDL_CameraID *devices = NULL;
+int devcount = 0;
+
+//int main()
+void app_t::run()
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_CAMERA)!= 0)
+	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_CAMERA))
 	{
 		SDL_Log("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		return 1;
+		return;
 	}
 
 	SDL_Window* window = SDL_CreateWindow("test", 640, 480, SDL_WINDOW_RESIZABLE ); // TODO: Configure version with DSS
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
 
-	camera cam(renderer, 640, 480, 0);
-	if (!cam.init())
-	{
-		SDL_Log("Failed to initialize camera.\n");
-		SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-		return 1;
+	devices = SDL_GetCameras(&devcount);
+    if (devices == NULL) {
+        SDL_Log("Couldn't enumerate camera devices: %s", SDL_GetError());
+        return;
+    } else if (devcount == 0) {
+        SDL_Log("Couldn't find any camera devices! Please connect a camera and try again.");
+        return;
+    }
+
+	SDL_Camera*	camera = SDL_OpenCamera(devices[0], NULL);  // just take the first thing we see in any format it wants.
+    SDL_free(devices);
+    if (camera == NULL) {
+        SDL_Log("Couldn't open camera: %s", SDL_GetError());
+        return;
 	}
 
-	bool quit = false;
+
+
+	//bool quit = false;
 	SDL_Event event;
-	while (!quit) // See app_t declaration original: while (m_running)
+	while (m_running) // See app_t declaration original: while (m_running)
 	{
 		while (SDL_PollEvent(&event)) // Keep polling events for as long as they are coming
 		{
 			if (event.type == SDL_EVENT_QUIT)
 			{
-					//kill();
-					quit = true;
+					kill();
+					//quit = true;
+			}
+			
+			else if (event.type == SDL_EVENT_CAMERA_DEVICE_APPROVED)
+			{
+				SDL_Log("Camera device approved event received.\n");
+			}
+
+			else if (event.type == SDL_EVENT_CAMERA_DEVICE_DENIED)
+			{
+				SDL_Log("Camera device rejected event received.\n");
+			
+				return;
 			}
 		}
 		// Render widgets
-			cam.update();
-			SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        	SDL_RenderClear(renderer);
-			cam.render();
-       		SDL_RenderPresent(renderer);
+
+		Uint64 timestampNS = 0;
+    	SDL_Surface *frame = SDL_AcquireCameraFrame(camera, &timestampNS);
+
+
+		 if (frame != NULL) {
+        /* Some platforms (like Emscripten) don't know _what_ the camera offers
+           until the user gives permission, so we build the texture and resize
+           the window when we get a first frame from the camera. */
+		   if (!texture) {
+            SDL_SetWindowSize(window, frame->w, frame->h);  /* Resize the window to match */
+            SDL_SetRenderLogicalPresentation(renderer, frame->w, frame->h, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+            texture = SDL_CreateTexture(renderer, frame->format, SDL_TEXTUREACCESS_STREAMING, frame->w, frame->h);
+        	}
+
+			if (texture) {
+            	SDL_UpdateTexture(texture, NULL, frame->pixels, frame->pitch);
+        	}
+
+			SDL_ReleaseCameraFrame(camera, frame);
+
+		}
+
+		SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x99, SDL_ALPHA_OPAQUE);
+    	SDL_RenderClear(renderer);
+    	if (texture) {  /* draw the latest camera frame, if available. */
+        	SDL_RenderTexture(renderer, texture, NULL, NULL);
+    	}
+    	SDL_RenderPresent(renderer);
 
 
 	}
 
-	SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-	return 0;
+	SDL_CloseCamera(camera);
+    SDL_DestroyTexture(texture);
+
+	return;
 }
