@@ -1,6 +1,6 @@
 /**
  * @file socket_helper.h
- * @author Yevgenya Coonan (yacoonan@gmail.com)
+ * @author Estelle Coonan (yacoonan@gmail.com)
  * @brief Boilerplate socket utilities
  * @date 2026-01-20
  *
