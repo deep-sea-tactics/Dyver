@@ -1,12 +1,13 @@
 ![alt text](https://github.com/deep-sea-tactics/Dyver/blob/main/dyver_light.png "Dyver Logo")
 
 # Dyver
-Dyver is a consolidation of core Deep Sea Tactics robot features into one application. This includes drivers, interfaces, simulations, and various other tools.
+Dyver is an application designed to aid in the operation of an ROV, and contains necessary drivers and mathematics. It additionally will have features for MATE ROV tasks.
 
 ## For Developers
 Useful information for developers working internally on Dyver.
 
 * Units of Measurement
+
 All units follow the SI standard. Units that do not follow this standard shall be converted into the standard before being placed into any data structures.
 
 ## Usage
