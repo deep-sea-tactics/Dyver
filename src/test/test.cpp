@@ -12,8 +12,6 @@
 
 #include "utils.h"
 
-#include "servo.h"
-
 #include "test.h"
 
 static const test_t TEST_TEST = test_t("test_test", __LINE__,
@@ -70,17 +68,6 @@ static const test_t TEST_AMP_DISTRIBUTOR = test_t("test_amp_distributor", __LINE
 			return false;
 		if (approx_eq(req_d->get_allowance(), 1.6667, 0.1) == false)
 			return false;
-
-		return true;
-	});
-
-static const test_t TEST_SERVO = test_t("test_servo", __LINE__,
-	[]()
-	{
-		servo_t servo = servo_t(9);
-		(void)servo;
-
-		// Do some testing... try to fail the test
 
 		return true;
 	});
@@ -222,7 +209,6 @@ auto main() -> int
 {
 	TEST_TEST.run();
 	TEST_AMP_DISTRIBUTOR.run();
-	TEST_SERVO.run();
 	TEST_PWM_THROTTLE.run();
 	TEST_ABSTRACT_ROV.run();
 	TEST_SOCKET_HELPER.run();
