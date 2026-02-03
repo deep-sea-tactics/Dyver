@@ -29,13 +29,13 @@ public:
 	 */
 	window_helper_t(std::string title)
 	{
-		SDLWindow = SDL_CreateWindow(title.c_str(), 700, 300, 0);
+		sdl_window = SDL_CreateWindow(title.c_str(), 700, 300, 0);
 
-		const auto *Fmt = SDL_GetPixelFormatDetails(get_surface()->format);
+		const auto *fmt = SDL_GetPixelFormatDetails(get_surface()->format);
 
-		SDL_FillSurfaceRect(get_surface(), nullptr, SDL_MapRGB(Fmt, nullptr, 50, 50, 50));
+		SDL_FillSurfaceRect(get_surface(), nullptr, SDL_MapRGB(fmt, nullptr, 50, 50, 50));
 
-		SDL_UpdateWindowSurface(SDLWindow);
+		SDL_UpdateWindowSurface(sdl_window);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public:
 	 *
 	 * @return SDL_Surface*
 	 */
-	SDL_Surface *get_surface() const { return SDL_GetWindowSurface(SDLWindow); }
+	SDL_Surface *get_surface() const { return SDL_GetWindowSurface(sdl_window); }
 
 	// Prevent copying of the window
 	window_helper_t(const window_helper_t &) = delete;
@@ -51,14 +51,14 @@ public:
 
 	~window_helper_t()
 	{
-		if (SDLWindow && SDL_WasInit(SDL_INIT_VIDEO))
+		if (sdl_window && SDL_WasInit(SDL_INIT_VIDEO))
 		{
-			SDL_DestroyWindow(SDLWindow);
+			SDL_DestroyWindow(sdl_window);
 		}
 	}
 
 private:
-	SDL_Window *SDLWindow{nullptr};
+	SDL_Window *sdl_window = nullptr;
 };
 
 /**
