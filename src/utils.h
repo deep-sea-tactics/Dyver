@@ -97,10 +97,55 @@ struct linear_percentage_t
 		return (inbetween / diff);
 	}
 
+	auto sgn_to_percentage(const double v) -> double
+	{
+		double diff = (m_max - m_min);
+
+		double mid = diff / 2.0;
+
+		double inbetween = (v - m_min);
+
+		double res;
+		linear_percentage_t pc = linear_percentage_t(mid, diff);
+
+		// Gross, but I'm lazy
+
+		if (inbetween < mid)
+		{
+			pc.m_min = 0.0;
+			pc.m_max = mid;
+			res = pc.to_percentage(inbetween) * -1.0;
+
+			return res;
+		}
+
+		res = pc.to_percentage(inbetween);
+
+		return res;
+	}
+
 	auto to_value(const double p) -> double
 	{
 		double diff = (m_max - m_min);
 		return m_min + (p * diff);
+	}
+
+	auto sgn_to_value(const double p) -> double
+	{
+		double diff = (m_max - m_min);
+		double mid = diff / 2.0;
+
+		linear_percentage_t pc = linear_percentage_t(mid, diff);
+
+		if (p < 0.0)
+		{
+			pc.m_min = 0.0;
+			pc.m_max = mid;
+
+			return m_min + pc.to_value(std::abs(p));
+		}
+
+		return m_min + pc.to_value(p);
 	}
 };
 } // namespace utils

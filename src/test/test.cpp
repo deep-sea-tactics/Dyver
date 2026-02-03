@@ -8,6 +8,8 @@
 
 #include "networking/socket_helper.h"
 
+#include "DSS.h"
+
 #include "rov.h"
 
 #include "utils.h"
@@ -89,6 +91,26 @@ static const test_t TEST_PWM_THROTTLE = test_t("test_pwm_throttle", __LINE__,
 		double v = throttle.to_value(p);
 
 		if (v != 1075.0)
+			return false;
+
+		double sgn_p = throttle.sgn_to_percentage(1025.0);
+
+		if (sgn_p != -0.5)
+			return false;
+
+		sgn_p = throttle.sgn_to_percentage(1075.0);
+
+		if (sgn_p != 0.5)
+			return false;
+
+		double sgn_v = throttle.sgn_to_value(-0.5);
+
+		if (sgn_v != 1025.0)
+			return false;
+
+		sgn_v = throttle.sgn_to_value(0.5);
+
+		if (sgn_v != 1075.0)
 			return false;
 
 		return true;
@@ -207,11 +229,21 @@ static const test_t TEST_DENSE_UTILS = test_t("", __LINE__, [](){
 */
 auto main() -> int
 {
-	TEST_TEST.run();
-	TEST_AMP_DISTRIBUTOR.run();
-	TEST_PWM_THROTTLE.run();
-	TEST_ABSTRACT_ROV.run();
-	TEST_SOCKET_HELPER.run();
+	std::cout << "Commencing Dyver Tests" << std::endl;
+
+	console_clear();
+
+	int passed_tests = 0;
+	int failed_tests = 0;
+
+	TEST_TEST.run(&passed_tests, &failed_tests);
+	TEST_AMP_DISTRIBUTOR.run(&passed_tests, &failed_tests);
+	TEST_PWM_THROTTLE.run(&passed_tests, &failed_tests);
+	TEST_ABSTRACT_ROV.run(&passed_tests, &failed_tests);
+	TEST_SOCKET_HELPER.run(&passed_tests, &failed_tests);
+
+	std::cout << passed_tests << " tests passed" << std::endl;
+	std::cout << failed_tests << " tests failed" << std::endl;
 
 	return 0;
 }

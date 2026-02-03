@@ -10,6 +10,7 @@ add_executable(
     ../amp_distribution.cpp
     ../rov.cpp
     ../networking/socket_helper.cpp
+    ${CMAKE_BINARY_DIR}/_deps/dss-src/dss/cli.cpp
 )
 
 target_include_directories(
@@ -17,7 +18,14 @@ target_include_directories(
     PRIVATE
     ${eigen_SOURCE_DIR}
     ${sdl_SOURCE_DIR}/include
+    ${dss_SOURCE_DIR}/dss
     ${matplotplusplus_SOURCE_DIR}/source
     ${CMAKE_BINARY_DIR}/_deps/matplotplusplus-build/source/matplot/
     ..
+)
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+    DSS
 )

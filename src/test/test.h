@@ -92,7 +92,7 @@ struct test_t
 	/**
 	 * Run the test and report failure/success in the standard output
 	 */
-	bool run() const
+	bool run(int *passed_tests_counter = nullptr, int *failed_tests_counter = nullptr) const
 	{
 		bool res = false;
 		try
@@ -102,21 +102,41 @@ struct test_t
 			if (res == true)
 			{
 				notification_test_passed(m_id);
+
+				if (passed_tests_counter != nullptr)
+				{
+					++*passed_tests_counter;
+				}
 			}
 			else if (res == false)
 			{
 				notification_test_failed(m_id, false);
+
+				if (failed_tests_counter != nullptr)
+				{
+					++*failed_tests_counter;
+				}
 			}
 		}
 		catch (const std::exception &e)
 		{
 			notification_test_failed(m_id, true);
 			std::cout << e.what() << std::endl;
+
+			if (failed_tests_counter != nullptr)
+			{
+				++*failed_tests_counter;
+			}
 		}
 		catch (const int &code)
 		{
 			notification_test_failed(m_id, true);
 			std::cout << "Error code: " << code << std::endl;
+
+			if (failed_tests_counter != nullptr)
+			{
+				++*failed_tests_counter;
+			}
 		}
 
 		std::cout << "      Traceback to line " << int(m_line) << std::endl << std::endl;
