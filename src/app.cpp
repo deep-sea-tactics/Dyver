@@ -11,7 +11,7 @@ void app_t::run()
 		{
 			if (event.type == SDL_EVENT_QUIT)
 			{
-					kill();
+				kill();
 			}
 		}
 		// Render widgets
